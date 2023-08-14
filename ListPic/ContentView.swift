@@ -8,14 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject var vm = ViewModel()
+    
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+
+            
+            List{
+                ForEach(vm.dataList){ data in
+                    
+                    
+                    Text(data.title)
+                        .font(.title)
+                        .bold()
+                    
+                    
+                    
+                }
+            }
+            
+            
+            
         }
         .padding()
+        .task {
+            vm.getProductList()
+        }
     }
 }
 
