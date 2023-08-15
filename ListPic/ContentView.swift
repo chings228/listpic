@@ -17,22 +17,25 @@ struct ContentView: View {
 
             
             List{
-                ForEach(vm.dataList){ data in
+                ForEach(vm.dataList){ product in
                     
+                    HStack{
+                        
+                        RowView(product:product)
+                    }
+                    .frame(height:80)
                     
-                    Text(data.title)
-                        .font(.title)
-                        .bold()
-                    
-                    
-                    
+
                 }
+
+                
             }
-            
-            
-            
+            .background(Color.white)
+            .scrollContentBackground(.hidden)
+
         }
         .padding()
+        .ignoresSafeArea()
         .task {
             vm.getProductList()
         }

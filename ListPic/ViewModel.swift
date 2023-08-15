@@ -13,9 +13,11 @@ class ViewModel : ObservableObject{
     
     @Published var dataList : [Product] = []
     
+
+    
     let url = "https://dummyjson.com/products"
     
-    
+
     
     
     func getProductList(){
@@ -35,7 +37,9 @@ class ViewModel : ObservableObject{
             print("list list ")
             self?.dataList = list.products
             
-            print(list.products.first)
+            guard let first = list.products.first else {return}
+            
+            print(first)
             
             
             

@@ -17,6 +17,32 @@ enum httpType{
 class NetworkManager{
     
     
+    
+    static func getAsset(url:String, completionHandler : @escaping (_ data : Data)->()){
+        
+        guard let url = URL(string: url) else {return}
+        
+        let request = URLRequest(url: url,cachePolicy: .reloadIgnoringLocalCacheData)
+        
+        URLSession.shared.dataTask(with: request){ data ,response,error in
+            
+            guard let data = data else { return }
+            
+            
+            completionHandler(data)
+            
+            
+        }
+        .resume()
+        
+        
+        
+        
+        
+        
+    }
+    
+    
     static func getDataWithTypePostGet<T:Decodable>(url : String ,classtype : T.Type, httptype : httpType ,postparam : String? , completionHandler : @escaping (_ dataObject: Any , _ error:String?)->()){
         
         print("\(classtype)")
