@@ -51,16 +51,24 @@ class ImageViewModel : ObservableObject{
     }
     
     
-    static func saveImage(url : String, folder : String , image : Image){
-        
-        //print(image.image)
-        
-        
-    }
     
     private func getFileName(url:String)->String{
         
-        let filename = "";
+        
+       var filename = "";
+        
+        guard  let url = URL(string: url) else {
+            return ""
+            
+        }
+        
+        
+        
+        
+        let prefix = url.pathComponents[3]
+        let suffix = url.lastPathComponent
+
+        filename = "\(prefix)-\(suffix)"
         
         
         return filename
@@ -70,6 +78,10 @@ class ImageViewModel : ObservableObject{
      func getImageByData(url:String){
         
      
+         
+         let filename = getFileName(url: url)
+         
+         print(filename)
         
         NetworkManager.getAsset(url: url) {[weak self] data in
             
@@ -78,9 +90,12 @@ class ImageViewModel : ObservableObject{
             print(image)
             
             DispatchQueue.main.async {
-                
+
+
                 print("download iamge \(url)")
                 self?.thumbnailimage = image
+                
+                LocalFileManager.saveAsset(asset: data, filename: filename, foldername: "product")
             }
             
             
