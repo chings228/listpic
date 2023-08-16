@@ -2,4 +2,4 @@
 
 
 
-<img src="assets/readme.png" width=300 alt="Alt text">
+<img src="assets/readme.png" width=200 alt="Alt text">
