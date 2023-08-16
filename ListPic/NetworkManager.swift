@@ -34,11 +34,7 @@ class NetworkManager{
             
         }
         .resume()
-        
-        
-        
-        
-        
+
         
     }
     
@@ -82,10 +78,7 @@ class NetworkManager{
                 }
                 
                 guard let data = data else {return}
-                
-               // print(data)
-               // print(String(data: data, encoding: .utf8)!)
-                
+
                 guard let list = try? JSONDecoder().decode(classtype, from: data) else {
                     
                     return

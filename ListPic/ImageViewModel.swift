@@ -61,10 +61,7 @@ class ImageViewModel : ObservableObject{
             return ""
             
         }
-        
-        
-        
-        
+
         let prefix = url.pathComponents[3]
         let suffix = url.lastPathComponent
 
@@ -75,46 +72,106 @@ class ImageViewModel : ObservableObject{
     }
     
     
-     func getImageByData(url:String){
+//     func getImageByData(url:String){
+//
+//
+//
+//         let filename = getFileName(url: url)
+//
+//         print(filename)
+//
+//         if (LocalFileManager.checkAssetFileExists(folderName: "product", filename: filename)){
+//
+//
+//             print("file exists")
+//
+//             guard let data = LocalFileManager.getAsset(folderName: "product", filename: filename) else {return}
+//
+//             guard let image = UIImage(data: data) else {return}
+//             thumbnailimage = image
+//
+//         }
+//
+//         else{
+//
+//             NetworkManager.getAsset(url: url) {[weak self] data in
+//
+//                 guard let image = UIImage(data: data) else {return}
+//
+//                 print(image)
+//
+//                 DispatchQueue.main.async {
+//
+//
+//                     print("download iamge \(url)")
+//                     self?.thumbnailimage = image
+//
+//                     LocalFileManager.saveAsset(asset: data, filename: filename, foldername: "product")
+//                 }
+//
+//
+//             }
+//
+//
+//         }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//    }
+//
+    
+    
+    func getImageByData(url:String){
+       
+    
         
-     
-         
-         let filename = getFileName(url: url)
-         
-         print(filename)
+        let filename = getFileName(url: url)
         
-        NetworkManager.getAsset(url: url) {[weak self] data in
-            
-            guard let image = UIImage(data: data) else {return}
-            
-            print(image)
-            
-            DispatchQueue.main.async {
+        print(filename)
+        
 
-
-                print("download iamge \(url)")
-                self?.thumbnailimage = image
+            
+            guard let data = LocalFileManager.getAsset(folderName: "product", filename: filename) else {
                 
-                LocalFileManager.saveAsset(asset: data, filename: filename, foldername: "product")
+                
+                NetworkManager.getAsset(url: url) {[weak self] data in
+                    
+                    guard let image = UIImage(data: data) else {return}
+                    
+                    print(image)
+                    
+                    DispatchQueue.main.async {
+
+
+                        print("download iamge \(url)")
+                        self?.thumbnailimage = image
+                        
+                        LocalFileManager.saveAsset(asset: data, filename: filename, foldername: "product")
+                    }
+                   
+                    
+                }
+                
+                return
+                
             }
             
-            
-            
-            
+            guard let image = UIImage(data: data) else {return}
+            thumbnailimage = image
             
         }
-            
-            
-        
-        
-        
-        
-        
-    }
-    
-    
-    
-    
+
+       
+       
+   
+   
+   
     
     
 }

@@ -38,7 +38,31 @@ class LocalFileManager{
     }
     
     
-     static func getFilePath(folderName : String , filename : String ) -> URL?{
+    static func getAsset(folderName : String , filename : String) -> Data?{
+        
+        
+        guard let filepathUrl = getFilePath(folderName: folderName, filename: filename) else {return nil}
+        
+        return FileManager.default.contents(atPath: filepathUrl.path)
+
+
+    }
+    
+    
+    static func checkAssetFileExists(folderName : String , filename : String) -> Bool{
+        
+        
+        guard let filepathUrl = getFilePath(folderName: folderName, filename: filename) else {return false}
+        
+        if (FileManager.default.fileExists(atPath: filepathUrl.path)){
+            return true
+        }
+        
+        return false
+    }
+    
+    
+     private static func getFilePath(folderName : String , filename : String ) -> URL?{
         
         
         guard let folderURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
@@ -51,6 +75,9 @@ class LocalFileManager{
         
         
     }
+    
+    
+    
     
     
     
