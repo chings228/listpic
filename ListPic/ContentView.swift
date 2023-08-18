@@ -13,28 +13,39 @@ struct ContentView: View {
     
     
     var body: some View {
+        
+        NavigationView {
         VStack {
-
             
-            List{
-                ForEach(vm.dataList){ product in
-                    
-                    HStack{
+            
+
+          
+                List{
+                    ForEach(vm.dataList){ product in
                         
-                        RowView(product:product)
+                        HStack{
+                            
+                            RowView(product:product)
+                        }
+                        .frame(height:80)
+                        
+
                     }
-                    .frame(height:80)
+
                     
-
                 }
-
-                
+                .background(Color.white)
+                .scrollContentBackground(.hidden)
+                .navigationTitle("Brand Product")
             }
-            .background(Color.white)
-            .scrollContentBackground(.hidden)
+        
+            
+            
+
 
         }
-        .padding()
+      
+//        .padding()
         .ignoresSafeArea()
         .task {
             vm.getProductList()

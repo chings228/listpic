@@ -18,6 +18,9 @@ enum ImageError : Error{
 }
 
 
+
+
+
 class ImageViewModel : ObservableObject{
     
     
