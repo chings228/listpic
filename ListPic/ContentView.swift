@@ -48,7 +48,9 @@ struct ContentView: View {
 //        .padding()
         .ignoresSafeArea()
         .task {
-            vm.getProductList()
+           await vm.getProductListByAsync()
+            
+            //vm.getProductList()
         }
     }
 }

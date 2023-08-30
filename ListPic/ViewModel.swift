@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 
 class ViewModel : ObservableObject{
     
@@ -45,6 +46,26 @@ class ViewModel : ObservableObject{
             
         }
 
+        
+    }
+    
+    
+    func getProductListByAsync() async{
+        
+        do{
+            
+            let result =  try await  NetworkManager.getDataByAsync(url: url, classtype: Products.self)
+            
+            
+            guard let list = result as? Products else {return}
+            
+            self.dataList = list.products
+            
+        }
+        catch{
+            
+            print("DEBUG \(error.localizedDescription)")
+        }
         
     }
 
